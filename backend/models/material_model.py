@@ -16,3 +16,13 @@ def load_materials(file_path):
             materials.append(mat)
     return materials
 
+import psycopg2
+
+def get_materials():
+    conn = psycopg2.connect("dbname=yourdb user=youruser password=yourpass host=localhost")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM materials;")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+    conn.close()
